@@ -1,8 +1,6 @@
 package org.example.exercisespringallabout.config;
 
-import org.example.exercisespringallabout.service.EmailLicenseNotificationService;
-import org.example.exercisespringallabout.service.LicenseNotificationService;
-import org.example.exercisespringallabout.service.SmsLicenseNotificationService;
+import org.example.exercisespringallabout.domain.port.out.LicenseNotificationPort;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +19,7 @@ public class LicenseNotificationConfig {
     }
 
     @Bean
-    public LicenseNotificationService licenseNotificationService() {
-        return (LicenseNotificationService) context.getBean(notificationBeanName);
+    public LicenseNotificationPort licenseNotificationService() {
+        return (LicenseNotificationPort) context.getBean(notificationBeanName);
     }
 }

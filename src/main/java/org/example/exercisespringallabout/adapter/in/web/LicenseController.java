@@ -1,21 +1,21 @@
-package org.example.exercisespringallabout.controller;
+package org.example.exercisespringallabout.adapter.in.web;
 
-import org.example.exercisespringallabout.service.LicenseManager;
+import org.example.exercisespringallabout.application.LicenseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/licenses")
 public class LicenseController {
-    private final LicenseManager licenseManager;
+    private final LicenseService licenseService;
 
-    public LicenseController(LicenseManager licenseManager) {
-        this.licenseManager = licenseManager;
+    public LicenseController(LicenseService licenseService) {
+        this.licenseService = licenseService;
     }
 
     @GetMapping("/{userName}")
     public ResponseEntity issue(@PathVariable String userName){
-        licenseManager.issueLicense(userName);
+        licenseService.issueLicense(userName);
         return ResponseEntity.ok().build();
     }
 }
