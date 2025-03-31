@@ -1,2 +1,9 @@
+spring:
+  profiles:
+    active: dev
 license:
   notification-type: emailLicenseNotificationAdapter
+  notification:
+    type: email
+    sender-name: Reboot
+    retry-count: 3

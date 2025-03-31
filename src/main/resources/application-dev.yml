@@ -1,0 +1,6 @@
+server:
+  port: 8080
+external:
+  api:
+    key:demo-demo-demo
+
