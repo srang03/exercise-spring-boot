@@ -1,7 +1,7 @@
 package org.example.exercisespringallabout.adapter.in.web;
 
 import org.example.exercisespringallabout.application.LicenseService;
-import org.example.exercisespringallabout.domain.user.Role;
+import org.example.exercisespringallabout.aop.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.example.exercisespringallabout.domain.user.UserContext;

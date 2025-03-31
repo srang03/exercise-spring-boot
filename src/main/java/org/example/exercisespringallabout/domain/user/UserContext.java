@@ -1,5 +1,7 @@
 package org.example.exercisespringallabout.domain.user;
 
+import org.example.exercisespringallabout.aop.Role;
+
 public class UserContext {
     private static final ThreadLocal<Role> user = new ThreadLocal<>();
 

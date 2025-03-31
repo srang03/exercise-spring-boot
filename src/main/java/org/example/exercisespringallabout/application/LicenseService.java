@@ -1,9 +1,8 @@
 package org.example.exercisespringallabout.application;
 
-import org.example.exercisespringallabout.annotation.RequiresRole;
 import org.example.exercisespringallabout.annotation.RequiresRoles;
 import org.example.exercisespringallabout.domain.port.out.LicenseNotificationPort;
-import org.example.exercisespringallabout.domain.user.Role;
+import org.example.exercisespringallabout.aop.Role;
 import org.springframework.stereotype.Service;
 
 @Service

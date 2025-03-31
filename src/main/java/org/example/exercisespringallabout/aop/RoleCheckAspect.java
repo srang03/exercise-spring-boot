@@ -4,7 +4,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.example.exercisespringallabout.annotation.RequiresRoles;
-import org.example.exercisespringallabout.domain.user.Role;
 import org.springframework.stereotype.Component;
 import org.example.exercisespringallabout.domain.user.UserContext;
 import java.util.Arrays;
