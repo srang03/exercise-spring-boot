@@ -13,6 +13,7 @@ public class LoggingAspect{
     // 1. 메서드 실행 전 로그
     @Before("execution(* org.example.exercisespringallabout.application..*(..))")
     public void logBefore(JoinPoint joinPoint) {
+        System.out.println("----------------------------------------------------------");
         System.out.println("🔍 [Before] " + joinPoint.getSignature().getName() + " 호출 시작");
     }
     // 2. 정상 실행 후 로그

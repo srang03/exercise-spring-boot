@@ -12,6 +12,12 @@ public class LicenseService {
     }
 
     public void issueLicense(String userName) {
+        try{
+            Thread.sleep(500);
+        }catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         if(userName == null || userName.isBlank() || userName.contains("fail")) {
             throw new IllegalArgumentException("잘못된 사용자입니다.");
         }
