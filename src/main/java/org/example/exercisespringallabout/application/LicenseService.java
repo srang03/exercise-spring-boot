@@ -12,6 +12,10 @@ public class LicenseService {
     }
 
     public void issueLicense(String userName) {
+        if(userName == null || userName.isBlank() || userName.contains("fail")) {
+            throw new IllegalArgumentException("잘못된 사용자입니다.");
+        }
+
         String licenseKey = "ABC-1234";
         System.out.println("🎫 라이선스 발급 완료: " + licenseKey);
 

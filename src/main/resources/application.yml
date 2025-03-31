@@ -1,2 +1,2 @@
 license:
-  notification-type: emailLicenseNotificationService
+  notification-type: emailLicenseNotificationAdapter
