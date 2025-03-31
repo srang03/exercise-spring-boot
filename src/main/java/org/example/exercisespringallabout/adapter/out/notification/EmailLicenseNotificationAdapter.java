@@ -3,7 +3,7 @@ package org.example.exercisespringallabout.adapter.out.notification;
 import org.example.exercisespringallabout.domain.port.out.LicenseNotificationPort;
 import org.springframework.stereotype.Service;
 
-@Service("emailLicenseNotificationService")
+@Service("emailLicenseNotificationAdapter")
 public class EmailLicenseNotificationAdapter implements LicenseNotificationPort {
 
     @Override
