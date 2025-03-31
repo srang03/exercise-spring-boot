@@ -3,7 +3,9 @@ spring:
     active: dev
 license:
   notification-type: emailLicenseNotificationAdapter
-  notification:
-    type: email
+  email:
     sender-name: Reboot
     retry-count: 3
+  sms:
+    sender-number: "010-1234-5678"
+    retry-count: 2

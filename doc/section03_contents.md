@@ -1,6 +1,6 @@
-# 📘 주제 3: 설정 시스템 및 자동 구성 - 1단계 정리
+# 📘 주제 3: 설정 시스템 및 자동 구성
 
-## ✅ 1단계 목표
+## ✅ 파트 1 목표
 - Spring Boot 설정 구조 이해
 - 설정 우선순위 파악
 - `@Value`의 실무 활용 시점 파악
@@ -101,5 +101,118 @@ spring:
 
 ---
 
-✅ 다음 학습 단계: `@Value` vs `@ConfigurationProperties` 비교 및 실습
+## ✅ 파트 2 목표
+- `@ConfigurationProperties`를 활용해 구조화된 설정을 객체로 바인딩
+- 중첩 설정 클래스 구성 방법 학습
+- `@Validated`를 통한 설정값 유효성 검사 적용
+- 설정값에 따라 서비스에서 조건 분기 처리
 
+---
+
+## 1️⃣ `@ConfigurationProperties` 개념 및 장점
+
+| 항목 | 설명 |
+|------|------|
+| 사용 목적 | yml/properties 설정을 POJO에 바인딩 |
+| 자동 바인딩 | 타입 변환, 계층적 구조 자동 매핑 지원 |
+| 유지보수성 | 설정 관련 값을 한 클래스로 관리 가능 |
+| 문서화 가능 | 설정 클래스만 보면 전체 구조 파악 가능 |
+
+---
+
+## 2️⃣ application.yml 설정 예시
+
+```yaml
+license:
+  notification-type: emailLicenseNotificationAdapter
+  email:
+    sender-name: Reboot
+    retry-count: 3
+  sms:
+    sender-number: "010-1234-5678"
+    retry-count: 2
+```
+
+---
+
+## 3️⃣ 중첩 클래스 구성 예시
+
+```java
+@Component
+@ConfigurationProperties(prefix = "license")
+@Getter @Setter
+public class NotificationProperties {
+    private String notificationType; // ex: emailLicenseNotificationAdapter
+    private Email email;
+    private Sms sms;
+
+    @Getter @Setter
+    public static class Email {
+        private String senderName;
+        private int retryCount;
+    }
+
+    @Getter @Setter
+    public static class Sms {
+        private String senderNumber;
+        private int retryCount;
+    }
+}
+```
+
+> ✅ setter 가 반드시 있어야 바인딩 가능 (Spring Boot는 setter 기반 바인딩)
+
+---
+
+## 4️⃣ 설정값을 기준으로 서비스 내부 조건 분기
+
+```java
+@Service
+public class LicenseService {
+    private final LicenseNotificationPort licenseNotificationPort;
+    private final NotificationProperties props;
+
+    public LicenseService(LicenseNotificationPort licenseNotificationPort, NotificationProperties props) {
+        this.licenseNotificationPort = licenseNotificationPort;
+        this.props = props;
+    }
+
+    public void issueLicense(String userName) {
+        String type = props.getNotificationType();
+
+        if (type.startsWith("email")) {
+            var email = props.getEmail();
+            // email 발신 처리
+        } else if (type.startsWith("sms")) {
+            var sms = props.getSms();
+            // sms 발신 처리
+        }
+
+        licenseNotificationPort.notify(userName + " 님의 라이선스가 발급되었습니다.");
+    }
+}
+```
+
+> ✅ Bean 이름에 직접 의존하지 않고 설정값을 활용한 분기 처리 방식
+
+---
+
+## 5️⃣ 발생했던 문제 및 해결
+
+| 문제 | 원인 | 해결 방법 |
+|------|------|-------------|
+| 설정값이 null | prefix 불일치 (`license.notification-type` vs `license.notification`) | prefix를 `license`로 수정하여 전체 경로 포함 |
+| 바인딩 실패 | setter 없음 | 중첩 클래스에도 `@Setter` 추가 |
+
+---
+
+## ✅ 파트 2 요약
+
+| 항목 | 정리 |
+|------|------|
+| `@ConfigurationProperties` | 계층형 설정 구조를 객체에 바인딩 |
+| 중첩 클래스 | email, sms 등 설정을 명확히 분리 가능 |
+| 유효성 검사 | `@Validated` + 제약 어노테이션으로 설정값 검증 가능 |
+| 실무 활용 | 설정 기반 조건 분기, Bean 주입보다 유연하고 명확하게 사용 가능 |
+
+---
