@@ -1,6 +1,9 @@
 package org.example.exercisespringallabout.application;
 
+import org.example.exercisespringallabout.annotation.RequiresRole;
+import org.example.exercisespringallabout.annotation.RequiresRoles;
 import org.example.exercisespringallabout.domain.port.out.LicenseNotificationPort;
+import org.example.exercisespringallabout.domain.user.Role;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,5 +29,9 @@ public class LicenseService {
         System.out.println("🎫 라이선스 발급 완료: " + licenseKey);
 
         licenseNotificationPort.notify(userName + " 님의 라이선스가 발급되었습니다.");
+    }
+    @RequiresRoles({Role.ADMIN})
+    public void revokeLicense(String userName){
+        System.out.println("🗑️ 라이선스 삭제 완료: " + userName);
     }
 }
