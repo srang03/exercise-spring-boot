@@ -1,6 +1,7 @@
 package org.example.exercisespringallabout.application;
 
 import org.example.exercisespringallabout.annotation.RequiresRoles;
+import org.example.exercisespringallabout.config.NotificationProperties;
 import org.example.exercisespringallabout.domain.port.out.LicenseNotificationPort;
 import org.example.exercisespringallabout.aop.Role;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class LicenseService {
     private final LicenseNotificationPort licenseNotificationPort;
+    private final NotificationProperties props;
 
-    public LicenseService(LicenseNotificationPort licenseNotificationPort) {
+    public LicenseService(LicenseNotificationPort licenseNotificationPort, NotificationProperties props) {
         this.licenseNotificationPort = licenseNotificationPort;
+        this.props = props;
     }
 
     public void issueLicense(String userName) {
@@ -25,10 +28,23 @@ public class LicenseService {
         }
 
         String licenseKey = "ABC-1234";
+        String type = props.getNotificationType();
+
         System.out.println("🎫 라이선스 발급 완료: " + licenseKey);
 
+        if (type.startsWith("email")) {
+            var email = props.getEmail();
+            System.out.println("📧 이메일 발신자: " + email.getSenderName());
+            System.out.println("🔁 재시도 횟수: " + email.getRetryCount());
+
+        } else if (type.startsWith("sms")) {
+            var sms = props.getSms();
+            System.out.println("📱 SMS 발신 번호: " + sms.getSenderNumber());
+            System.out.println("🔁 재시도 횟수: " + sms.getRetryCount());
+        }
         licenseNotificationPort.notify(userName + " 님의 라이선스가 발급되었습니다.");
     }
+
     @RequiresRoles({Role.ADMIN})
     public void revokeLicense(String userName){
         System.out.println("🗑️ 라이선스 삭제 완료: " + userName);
