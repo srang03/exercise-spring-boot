@@ -3,8 +3,3 @@ server:
 external:
   api:
     key:demo-demo-demo
-
-logging:
-  level:
-    root: info
-    org.example.exercisespringallabout: debug

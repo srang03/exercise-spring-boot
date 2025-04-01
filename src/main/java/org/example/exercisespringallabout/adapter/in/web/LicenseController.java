@@ -1,11 +1,16 @@
 package org.example.exercisespringallabout.adapter.in.web;
 
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.example.exercisespringallabout.application.LicenseService;
 import org.example.exercisespringallabout.aop.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.example.exercisespringallabout.domain.user.UserContext;
 
+
+
+@Slf4j
 @RestController
 @RequestMapping("/licenses")
 public class LicenseController {
@@ -18,6 +23,7 @@ public class LicenseController {
     @GetMapping("/{userName}")
     public ResponseEntity issue(@PathVariable String userName){
         licenseService.issueLicense(userName);
+        log.info("라이선스 발급 요청 - 사용자: {}", userName);
         return ResponseEntity.ok().build();
     }
     @DeleteMapping("/{userName}")

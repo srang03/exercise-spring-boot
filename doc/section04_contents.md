@@ -64,9 +64,19 @@ Spring Boot는 기본적으로 **SLF4J + Logback** 조합을 사용합니다.
 | SLF4J (Simple Logging Facade for Java) | 로깅 인터페이스 (공통 API 역할) |
 | Logback | 실제 로그를 출력하는 구현체 (default) |
 
-> 즉, 코드는 `LoggerFactory.getLogger()` 등을 통해 SLF4J를 사용하지만,
-> 실제 출력은 내부적으로 Logback이 담당합니다.
+> 즉, 코드는 SLF4J의 API (`LoggerFactory.getLogger()` 또는 `@Slf4j`)를 사용하지만,
+> 실제로 로그 메시지를 처리하고 출력하는 구현체는 내부적으로 Logback이 담당합니다.
 
+### 🔄 구조 흐름 요약
+
+```
+[Your Code] → SLF4J API → Logback (Appender, Encoder 등) → 콘솔/파일
+```
+
+### 🧩 장점
+- SLF4J는 **로깅 추상화 인터페이스**이므로 logback 외에도 log4j, java.util.logging 등 다양한 구현체와 호환 가능
+- 추후 로깅 시스템 교체가 필요해도 **코드 수정 없이 구현체만 바꾸면 됨** (ex. Logback → Log4j2)
+- Spring Boot는 `spring-boot-starter-logging`에 의해 SLF4J + Logback이 기본 제공됨
 
 ---
 
@@ -151,3 +161,122 @@ logging:
     - 전체 시스템 로그는 warn 이상만 출력됨
 
 ---
+
+## ✅ 파트 4. 로그 포맷 커스터마이징 & 로그 분리 전략
+
+### 🎯 목표
+- 로그를 포맷팅하고 레벨에 따라 콘솔/파일로 분리 출력할 수 있다.
+
+### 🔧 logback-spring.xml 예시
+
+```xml
+<configuration>
+  <property name="LOG_PATH" value="logs"/>
+
+  <appender name="ConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %logger{36} - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+  </appender>
+
+  <appender name="FileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}/warn.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}/warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>WARN</level>
+    </filter>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="ConsoleAppender"/>
+    <appender-ref ref="FileAppender"/>
+  </root>
+</configuration>
+```
+
+### ✅ 핵심 설명
+
+| 항목 | 설명 |
+|------|------|
+| `%highlight(...)` | 콘솔에서 로그 레벨에 색상 적용 |
+| `ThresholdFilter` | 특정 레벨 이상만 출력하게 필터링 |
+| `RollingPolicy` | 날짜별 로그 파일 분리 저장 |
+
+> `application.yml`만으로는 로그 파일과 콘솔의 레벨을 분리할 수 없으며, logback-spring.xml을 통해야 정밀 제어가 가능함.
+
+---
+
+## ✅ 파트 5. MDC 기반 요청 추적 및 필터 체인 구조
+
+### 🎯 목표
+- 요청별로 고유한 식별자를 로그에 포함시켜 추적 가능하게 한다.
+- Spring의 Filter 구조와 MDC의 관계를 이해한다.
+
+### 🔍 MDC(Mapped Diagnostic Context)
+
+```java
+MDC.put("requestId", UUID.randomUUID().toString());
+log.info("요청 시작");
+MDC.clear();
+```
+
+### 🔧 logback-spring.xml 포맷에 삽입
+
+```xml
+<pattern>%d{HH:mm:ss.SSS} [%thread] [RID:%X{requestId}] %-5level %logger{36} - %msg%n</pattern>
+```
+
+---
+
+### ✅ 실습용 필터 예제
+
+```java
+@Component
+public class MdcLogFilter extends OncePerRequestFilter {
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+        throws ServletException, IOException {
+        try {
+            MDC.put("requestId", UUID.randomUUID().toString());
+            chain.doFilter(request, response);
+        } finally {
+            MDC.clear();
+        }
+    }
+}
+```
+
+---
+
+### 📎 필터 체인 구조
+
+```plaintext
+[Client 요청]
+  ↓
+[Filter Chain] ← MdcLogFilter 실행 위치
+  ↓
+[DispatcherServlet]
+  ↓
+@Controller → @Service → ...
+```
+
+---
+
+### 🧠 개념 정리
+
+| 항목 | 설명 |
+|------|------|
+| `@Slf4j` 없이 log 사용 가능? | ❌ 안 됨. Logger 선언 필요 |
+| `@Service`는 @Component인가? | ✅ 맞음 |
+| `@Service`는 필터로 등록되는가? | ❌ 아님. `Filter` 인터페이스 구현 시만 필터로 등록 가능 |
+| 필터 등록 조건 | `Filter` 상속 + `@Component` 또는 수동 등록 |
+

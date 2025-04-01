@@ -1,0 +1,50 @@
+🔍 SLF4J + Logback 조합 심화 이해
+✅ 구조 개요
+
+[Logger Interface] → [SLF4J (API)] → [Logback (Implementation)] → [Appender → Encoder → 콘솔/파일]
+
+🔗 역할 분리
+
+계층	구성 요소	설명
+
+1️⃣ 로깅 API	SLF4J (Logger)	로그 호출 코드를 추상화 (표준 인터페이스 제공)
+
+2️⃣ 구현체	Logback (LoggerContext, Appender, Encoder)	로그 메시지를 실제 처리하고 출력
+
+3️⃣ 출력 대상	Appender (ConsoleAppender, FileAppender)	로그를 콘솔, 파일, 외부 시스템으로 전송
+
+✅ SLF4J의 진짜 역할
+Logger logger = LoggerFactory.getLogger(MyClass.class)
+→ 이 코드는 SLF4J의 API입니다.
+
+내부적으로 SLF4J는 Classpath에 있는 구현체(Logback)를 동적으로 바인딩합니다.
+
+이 구조 덕분에 SLF4J를 유지한 채 Logback → Log4j2 등으로 쉽게 교체할 수 있습니다.
+
+✅ Logback의 내부 처리 순서
+예를 들어 다음과 같은 로그를 출력하면:
+
+log.info("User login: {}", username);
+Logback에서는 다음과 같이 처리됩니다:
+
+LoggerContext가 Logger 인스턴스를 관리
+
+해당 Logger에 연결된 Appender가 실행됨
+
+Appender는 메시지를 Encoder에 전달함
+
+Encoder가 로그 메시지를 포맷팅하여 콘솔/파일에 출력
+
+✅ 실무 팁: Logback 확장
+로그를 JSON으로 출력하고 싶다면 → LogstashEncoder 사용
+
+AOP와 결합해서 자동 로깅 → @LogExecutionTime, @LogRequest 등 구현 가능
+
+로그 MDC(Mapped Diagnostic Context) 활용 → 사용자 ID, 트랜잭션 ID 삽입 가능
+
+📦 결론 요약
+항목	SLF4J	Logback
+역할	로깅 인터페이스 (API)	실제 구현체
+교체 가능성	O (Log4j, JUL 등으로)	Spring Boot 기본값
+코드 예	log.info(...)	SLF4J 호출 → Logback 처리
+파일 설정	없음	logback-spring.xml로 설정
