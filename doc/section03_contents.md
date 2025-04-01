@@ -216,3 +216,141 @@ public class LicenseService {
 | 실무 활용 | 설정 기반 조건 분기, Bean 주입보다 유연하고 명확하게 사용 가능 |
 
 ---
+
+## ✅ 파트 3 목표
+- `@Configuration`, `@Bean`의 의미와 차이 이해
+- Spring Boot의 자동 설정(Auto Configuration) 원리 파악
+- `@ConditionalOn...` 시리즈 어노테이션 학습
+- 수동 설정 방식 vs 자동 조건 설정 방식의 차이 비교 및 실습
+
+---
+
+## 1️⃣ @Configuration & @Bean
+
+| 어노테이션 | 설명 |
+|------------|------|
+| `@Configuration` | 해당 클래스가 스프링 설정 클래스임을 명시 |
+| `@Bean` | 메서드의 반환 객체를 직접 스프링 빈으로 등록 |
+
+예시:
+```java
+@Configuration
+public class AppConfig {
+    @Bean
+    public MyService myService() {
+        return new MyService();
+    }
+}
+```
+
+---
+
+## 2️⃣ 자동 설정이란?
+Spring Boot는 의존성 존재 여부, 클래스패스 탐색, 프로퍼티 값 등을 기반으로
+수많은 기본 컴포넌트를 자동 등록해준다.
+
+자동 설정 클래스에는 아래와 같은 조합이 붙음:
+```java
+@Configuration
+@ConditionalOnClass(...)
+@ConditionalOnProperty(...)
+```
+
+> ✅ 대표 예: Spring Data JPA, Spring Web 등에서 내부적으로 자동 설정 적용
+
+---
+
+## 3️⃣ 주요 Conditional 어노테이션
+
+| 어노테이션 | 설명 |
+|-------------|------|
+| `@ConditionalOnClass` | 특정 클래스가 classpath에 있을 경우 설정 적용 |
+| `@ConditionalOnMissingBean` | 특정 타입의 빈이 없을 때 설정 적용 |
+| `@ConditionalOnProperty` | 지정된 설정값이 존재하거나 특정 값을 가질 때 설정 적용 |
+| `@ConditionalOnExpression` | SpEL 표현식이 true일 때 설정 적용 |
+
+---
+
+## 4️⃣ 실습: notificationType에 따라 조건부 빈 주입하기
+
+```java
+@Configuration
+public class NotificationConfig {
+    @Bean
+    @ConditionalOnProperty(name = "license.notification-type", havingValue = "email")
+    public LicenseNotificationPort emailAdapter() {
+        return new EmailAdapter();
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "license.notification-type", havingValue = "sms")
+    public LicenseNotificationPort smsAdapter() {
+        return new SmsAdapter();
+    }
+}
+```
+
+> 📌 조건에 맞는 Bean만 등록되어, 나머지는 컨테이너에 포함되지 않음
+
+---
+
+## 5️⃣ 수동 설정 방식 (ApplicationContext 기반)
+
+```java
+@Configuration
+public class LicenseNotificationConfig {
+    @Value("${license.notification-type}")
+    private String notificationBeanName;
+
+    private final ApplicationContext context;
+
+    public LicenseNotificationConfig(ApplicationContext context) {
+        this.context = context;
+    }
+
+    @Bean
+    @Primary
+    public LicenseNotificationPort licenseNotificationService() {
+        return (LicenseNotificationPort) context.getBean(notificationBeanName);
+    }
+}
+```
+
+✅ 설정 기반으로 동적 선택 가능 / ✅ 다양한 방식으로 확장 가능  
+❌ 실수 방지에 취약 / ❌ Bean 이름 관리가 복잡해질 수 있음
+
+---
+
+## 6️⃣ 충돌 문제 사례 및 해결
+
+오류:
+```
+Parameter 0 of constructor in LicenseService required a single bean, but 2 were found:
+ - emailLicenseNotificationAdapter
+ - smsLicenseNotificationAdapter
+```
+
+원인:
+- 기존 `@Service` Bean 등록이 그대로 유지되고 있음
+- 동시에 `@Bean` 수동 등록 → **같은 타입의 Bean 중복 등록** 오류
+
+해결:
+- 기존 `@Service` 제거하거나, `@ConditionalOnProperty` 만 유지
+
+---
+
+## ✅ 파트 3 요약
+
+| 항목 | 요약 |
+|------|------|
+| `@Configuration` | 설정 클래스임을 명시 |
+| `@Bean` | 수동 빈 등록 방식, 명시적 제어 가능 |
+| 자동 설정 | 클래스 존재/설정 값 기반 자동 구성 (@ConditionalOn...) |
+| 조건부 설정 | `@ConditionalOnProperty` 등으로 설정값에 따라 자동 분기 |
+| 실무 적용 | 설정 기반 주입 시 기존 `@Service` 충돌 주의 필요 |
+
+---
+
+🎯 다음: 주제 4 - 로깅 시스템 및 로그 설정
+
+

@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class LicenseNotificationConfig {
-
     @Value("${license.notification-type}")
     private String notificationBeanName;
 
@@ -22,6 +21,10 @@ public class LicenseNotificationConfig {
     @Bean
     @Primary
     public LicenseNotificationPort licenseNotificationService() {
+        Object beanDefinition = context.getBean(notificationBeanName);
+        if (!(beanDefinition instanceof LicenseNotificationPort)) {
+            throw new IllegalArgumentException("Invalid bean type: " + beanDefinition.getClass().getName());
+        }
         return (LicenseNotificationPort) context.getBean(notificationBeanName);
     }
 }
