@@ -1,1 +1,8 @@
-spring.application.name=review_module
+spring:
+  profiles:
+    active: dev
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
