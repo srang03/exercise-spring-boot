@@ -273,3 +273,5 @@ jakarta.validation.ConstraintDeclarationException: HV000151: A method overriding
 2025-04-02 13:16:30.609 [http-nio-8080-exec-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
 2025-04-02 13:16:31.776 [http-nio-8080-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
 2025-04-02 13:17:05.616 [http-nio-8080-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
+2025-04-02 15:47:14.768 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.lang.RuntimeException: 서버 내부에서 예기치 못한 오류가 발생했습니다.]
+2025-04-02 15:47:24.421 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.example.exercisespringallabout.exception.BusinessException: 비즈니스 로직 오류 발생!]
