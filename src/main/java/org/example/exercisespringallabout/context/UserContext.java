@@ -1,4 +1,4 @@
-package org.example.exercisespringallabout.domain.user;
+package org.example.exercisespringallabout.context;
 
 import org.example.exercisespringallabout.aop.Role;
 

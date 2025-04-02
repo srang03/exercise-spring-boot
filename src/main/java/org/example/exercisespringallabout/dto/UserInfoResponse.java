@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.example.exercisespringallabout.annotation.MaskField;
 
 @Getter
-public class UserInfo {
+public class UserInfoResponse {
     private String name;
 
     @MaskField
@@ -13,7 +13,7 @@ public class UserInfo {
     @MaskField
     private String email;
 
-    public UserInfo(String name, String phone, String email) {
+    public UserInfoResponse(String name, String phone, String email) {
         this.name = name;
         this.phone = phone;
         this.email = email;

@@ -4,13 +4,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 
+@Getter
 public class LicenseRequest {
     @NotNull
-    @NotBlank(message = "ID는 공백일 수 없습니다.")
+    @NotBlank(message = "Id is not possible to be null or blank.")
     private String id;
-    @Email(message = "이메일 형식이 잘못되었습니다.")
+    @Email(message = "The email format is incorrect.")
     private String email;
-    @Min(value = 0, message = "count는 0 이상이어야 합니다.")
+    @Min(value = 0, message = "The count must be greater than or equal to 0.")
     private Integer count;
 }

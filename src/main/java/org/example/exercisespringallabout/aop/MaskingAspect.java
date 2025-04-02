@@ -4,7 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.example.exercisespringallabout.annotation.MaskField;
-import org.example.exercisespringallabout.domain.user.UserContext;
+import org.example.exercisespringallabout.context.UserContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
