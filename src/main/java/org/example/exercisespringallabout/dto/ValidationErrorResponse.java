@@ -18,6 +18,5 @@ public class ValidationErrorResponse {
     public static class FieldError {
         private String field;
         private String reason;
-        LocalDateTime timeStamp = LocalDateTime.now();
     }
 }
