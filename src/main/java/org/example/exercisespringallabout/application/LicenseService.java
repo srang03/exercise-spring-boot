@@ -5,6 +5,7 @@ import org.example.exercisespringallabout.annotation.RequiresRoles;
 import org.example.exercisespringallabout.config.NotificationProperties;
 import org.example.exercisespringallabout.domain.port.out.LicenseNotificationPort;
 import org.example.exercisespringallabout.aop.Role;
+import org.example.exercisespringallabout.dto.LicenseRequest;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -52,5 +53,10 @@ public class LicenseService {
     public void revokeLicense(String userName){
         log.info("LicenseService.revokeLicense() called");
         System.out.println("🗑️ 라이선스 삭제 완료: " + userName);
+    }
+
+    public void createLicense(LicenseRequest licenseRequest) {
+        // 라이선스 생성 로직
+        System.out.println("라이선스 생성 완료: " + licenseRequest);
     }
 }

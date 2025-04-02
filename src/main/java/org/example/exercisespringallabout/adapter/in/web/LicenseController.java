@@ -1,9 +1,12 @@
 package org.example.exercisespringallabout.adapter.in.web;
 
+import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.example.exercisespringallabout.application.LicenseService;
 import org.example.exercisespringallabout.aop.Role;
+import org.example.exercisespringallabout.dto.LicenseRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.example.exercisespringallabout.domain.user.UserContext;
@@ -18,6 +21,14 @@ public class LicenseController {
 
     public LicenseController(LicenseService licenseService) {
         this.licenseService = licenseService;
+    }
+
+
+    @PostMapping("")
+
+    public ResponseEntity createLicense(@RequestBody @Valid LicenseRequest licenseRequest) {
+        licenseService.createLicense(licenseRequest);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{userName}")
