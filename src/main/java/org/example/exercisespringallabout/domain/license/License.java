@@ -1,7 +1,7 @@
 package org.example.exercisespringallabout.domain.license;
 
-import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
+import org.example.exercisespringallabout.vo.Email;
 
 // 도메인 모델 (Domain Model & VO)
 @RequiredArgsConstructor
