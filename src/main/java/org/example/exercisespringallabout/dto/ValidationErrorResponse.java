@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -16,5 +18,6 @@ public class ValidationErrorResponse {
     public static class FieldError {
         private String field;
         private String reason;
+        LocalDateTime timeStamp = LocalDateTime.now();
     }
 }
