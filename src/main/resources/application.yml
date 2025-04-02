@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: dev
+  messages:
+    encoding: utf-8
+    basename: ValidationMessages
 license:
   notification-type: emailLicenseNotificationAdapter
   email:
