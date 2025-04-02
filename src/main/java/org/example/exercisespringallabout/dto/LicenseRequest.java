@@ -4,10 +4,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.example.exercisespringallabout.validator.ValidateId;
 
 @Getter
+@Builder
+@AllArgsConstructor
 public class LicenseRequest {
     @NotNull
     @ValidateId

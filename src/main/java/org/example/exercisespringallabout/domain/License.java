@@ -1,4 +1,4 @@
-package org.example.exercisespringallabout.domain.license;
+package org.example.exercisespringallabout.domain;
 
 import lombok.RequiredArgsConstructor;
 import org.example.exercisespringallabout.vo.Email;
@@ -10,4 +10,10 @@ public class License {
     private final Integer count;
     private final String licenseKey;
     private final Email email;
+    private final boolean isActive;
+
+    public boolean isActive() {
+        return isActive;
+    }
 }
+

@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.example.exercisespringallabout.annotation.RequiresRoles;
 import org.example.exercisespringallabout.config.NotificationProperties;
-import org.example.exercisespringallabout.domain.license.License;
+import org.example.exercisespringallabout.domain.License;
 import org.example.exercisespringallabout.domain.port.out.LicenseNotificationPort;
 import org.example.exercisespringallabout.aop.Role;
 import org.example.exercisespringallabout.dto.LicenseRequest;
@@ -34,7 +34,7 @@ public class LicenseService implements IssueLicenseUseCase {
         }
 
         String licenseKey = UUID.randomUUID().toString();
-        License license = new License(licenseRequest.getId(), licenseRequest.getCount(), licenseKey, new Email(licenseRequest.getEmail()));
+        License license = new License(licenseRequest.getId(), licenseRequest.getCount(), licenseKey, new Email(licenseRequest.getEmail()),true);
         System.out.println("🎫 라이선스 발급 완료: " + licenseKey);
 
         String type = props.getNotificationType();

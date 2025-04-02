@@ -63,3 +63,10 @@
 ### 파트 2	@ControllerAdvice, @ExceptionHandler 를 활용한 전역 처리
 ### 파트 3	커스텀 예외 정의 및 계층별 분리 전략 (Service / Domain)
 ### 파트 4	예외 메시지 구조 설계 및 응답 포맷 표준화 (RESTful)
+
+## 주제 7. 테스트 전략 및 실습 (단위 테스트/통합 테스트)
+### 파트 1	테스트의 종류와 개념 (단위, 통합, 인수 테스트 차이)
+### 파트 2	JUnit5 + Spring Boot 테스트 환경 설정
+### 파트 3	유닛 테스트 실습 (@MockBean, @InjectMocks)
+### 파트 4	통합 테스트 실습 (@SpringBootTest, @WebMvcTest)
+### 파트 5	테스트 데이터 구성 전략 (TestFixture / @Sql 등)
