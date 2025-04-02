@@ -7,6 +7,7 @@ import org.example.exercisespringallabout.aop.Role;
 import org.example.exercisespringallabout.dto.LicenseRequest;
 import org.example.exercisespringallabout.dto.LicenseResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.example.exercisespringallabout.context.UserContext;
 
@@ -22,7 +23,12 @@ public class LicenseController {
     }
 
     @PostMapping("")
-    public ResponseEntity<LicenseResponse> createLicense(@RequestBody @Valid LicenseRequest licenseRequest) {
+    public ResponseEntity<?> createLicense(@RequestBody @Valid LicenseRequest licenseRequest,
+                                                    BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
+        }
+
         LicenseResponse licenseResponse = licenseService.issueLicense(licenseRequest);
         return ResponseEntity.ok().body(licenseResponse);
     }
