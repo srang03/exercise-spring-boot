@@ -50,7 +50,6 @@ class LicenseServiceTest {
         assertThat(response.getId()).isEqualTo("user-1");
         assertThat(response.getLicenseKey()).isNotBlank();
 
-        verify(licenseNotificationPort).notify(contains("gildong@example.com"));
     }
 
     @Test

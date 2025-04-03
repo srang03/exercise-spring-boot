@@ -117,3 +117,243 @@ Action:
 
 Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
 
+2025-04-03 14:12:35.514 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseController' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\in\web\LicenseController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:12:35.519 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.in.web.LicenseController required a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
+
+2025-04-03 14:16:16.846 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [org.example.exercisespringallabout.infrastructure.adapter.out.persistence.LicenseRepositoryAdapter]
+2025-04-03 14:16:16.850 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: I/O failure while processing configuration class [org.example.exercisespringallabout.infrastructure.adapter.out.persistence.LicenseRepositoryAdapter]
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:264)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:209)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:327)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:259)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:195)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:165)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:417)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:290)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:789)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:607)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at org.example.exercisespringallabout.ExerciseSpringAllAboutApplication.main(ExerciseSpringAllAboutApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.io.FileNotFoundException: class path resource [org/example/exercisespringallabout/application/port/out/LicenseRepository.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:215)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:54)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:48)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.createMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:86)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:73)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:81)
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:643)
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getInterfaces(ConfigurationClassParser.java:969)
+	at org.springframework.context.annotation.ConfigurationClassParser.processInterfaces(ConfigurationClassParser.java:409)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:355)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:259)
+	... 21 common frames omitted
+2025-04-03 14:18:42.207 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'licenseService': Resolution of declared constructors on bean Class [org.example.exercisespringallabout.application.service.LicenseService] from ClassLoader [org.springframework.boot.devtools.restart.classloader.RestartClassLoader@589246df] failed
+2025-04-03 14:18:42.215 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'licenseService': Resolution of declared constructors on bean Class [org.example.exercisespringallabout.application.service.LicenseService] from ClassLoader [org.springframework.boot.devtools.restart.classloader.RestartClassLoader@589246df] failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:384)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1314)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1209)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at org.example.exercisespringallabout.ExerciseSpringAllAboutApplication.main(ExerciseSpringAllAboutApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: java.lang.NoClassDefFoundError: org/example/exercisespringallabout/application/port/out/LicenseRepository
+	at java.base/java.lang.Class.getDeclaredConstructors0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredConstructors(Class.java:3549)
+	at java.base/java.lang.Class.getDeclaredConstructors(Class.java:2727)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:379)
+	... 21 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.example.exercisespringallabout.application.port.out.LicenseRepository
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:534)
+	at java.base/java.lang.Class.forName(Class.java:513)
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 25 common frames omitted
+2025-04-03 14:33:21.697 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseService' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\application\service\LicenseService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'licenseRepositoryAdapter' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\out\persistence\LicenseRepositoryAdapter.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.domain.port.out.LicenseRepositoryPort' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:33:21.717 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.out.persistence.LicenseRepositoryAdapter required a bean of type 'org.example.exercisespringallabout.domain.port.out.LicenseRepositoryPort' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.domain.port.out.LicenseRepositoryPort' in your configuration.
+
+2025-04-03 14:41:50.547 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseController' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\in\web\LicenseController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:41:50.553 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.in.web.LicenseController required a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
+
+2025-04-03 14:41:52.284 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseController' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\in\web\LicenseController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:41:52.287 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.in.web.LicenseController required a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
+
+2025-04-03 14:42:09.545 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseController' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\in\web\LicenseController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:42:09.545 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.in.web.LicenseController required a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
+
+2025-04-03 14:42:11.319 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseController' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\in\web\LicenseController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:42:11.323 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.in.web.LicenseController required a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
+
+2025-04-03 14:44:04.511 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseController' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\in\web\LicenseController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:44:04.519 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.in.web.LicenseController required a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
+
+2025-04-03 14:44:06.303 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseController' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\in\web\LicenseController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:44:06.311 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.in.web.LicenseController required a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
+
+2025-04-03 14:44:19.478 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseController' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\in\web\LicenseController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:44:19.478 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.in.web.LicenseController required a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
+
+2025-04-03 14:44:22.361 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'licenseController' defined in file [C:\dev\013_spring\exercise\exercise-spring-all-about\target\classes\org\example\exercisespringallabout\infrastructure\adapter\in\web\LicenseController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-04-03 14:44:22.378 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in org.example.exercisespringallabout.infrastructure.adapter.in.web.LicenseController required a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.example.exercisespringallabout.application.port.in.IssueLicenseUseCase' in your configuration.
+
