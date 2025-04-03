@@ -1,5 +1,6 @@
 package org.example.exercisespringallabout.domain;
 
+import org.example.exercisespringallabout.domain.model.License;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

@@ -1,6 +1,7 @@
 package org.example.exercisespringallabout.domain.port.out;
 
-import org.example.exercisespringallabout.entity.LicenseEntity;
+
+import org.example.exercisespringallabout.infrastructure.adapter.out.persistence.entity.LicenseEntity;
 
 public interface LicenseRepositoryPort {
     void save(LicenseEntity license);

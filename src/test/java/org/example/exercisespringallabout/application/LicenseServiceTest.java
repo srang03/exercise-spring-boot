@@ -1,9 +1,10 @@
 package org.example.exercisespringallabout.application;
 
-import org.example.exercisespringallabout.config.NotificationProperties;
+import org.example.exercisespringallabout.application.service.LicenseService;
+import org.example.exercisespringallabout.common.dto.LicenseRequest;
+import org.example.exercisespringallabout.common.dto.LicenseResponse;
 import org.example.exercisespringallabout.domain.port.out.LicenseNotificationPort;
-import org.example.exercisespringallabout.dto.LicenseRequest;
-import org.example.exercisespringallabout.dto.LicenseResponse;
+import org.example.exercisespringallabout.infrastructure.config.NotificationProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
