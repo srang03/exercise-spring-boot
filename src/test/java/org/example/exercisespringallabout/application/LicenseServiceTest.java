@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.ErrorResponse;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -33,7 +34,6 @@ class LicenseServiceTest {
                 .email("gildong@example.com")
                 .count(3)
                 .build();
-
         // 알림 타입을 email로 설정
         NotificationProperties.Email emailProps = mock(NotificationProperties.Email.class);
         when(notificationProperties.getNotificationType()).thenReturn("email");
